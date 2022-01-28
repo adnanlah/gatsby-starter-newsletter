@@ -14,7 +14,6 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-typescript",
-    "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-plugin-mdx",
@@ -23,7 +22,7 @@ module.exports = {
     resolve: "gatsby-source-filesystem",
       options: {
         name: "issues",
-        path: "${__dirname}/issues",
+        path: `${__dirname}/issues`,
       }
     }
   ]
