@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Link, graphql, PageProps } from 'gatsby'
+import Layout from '../../components/Layout'
 
 interface StaticQueryProps extends PageProps {
   data: {
@@ -18,7 +19,8 @@ interface StaticQueryProps extends PageProps {
 
 const IssuePage: React.FunctionComponent<StaticQueryProps> = ({ data }) => {
   return (
-    <section>
+    <Layout>
+      <section>
         <h1>My issue posts:</h1>
         <div>
           {
@@ -33,7 +35,8 @@ const IssuePage: React.FunctionComponent<StaticQueryProps> = ({ data }) => {
             ))
           }
         </div>
-    </section>
+      </section>
+    </Layout>
   )
 }
 

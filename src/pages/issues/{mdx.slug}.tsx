@@ -1,16 +1,31 @@
 import * as React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, PageProps } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import Layout from '../../components/Layout'
 
-const BlogPost = ({data}) => {
+interface StaticQueryProps extends PageProps {
+  data: {
+    mdx: {
+      frontmatter: {
+        date: string
+        title: string
+      },
+      body: string
+    }
+  }
+}
+
+const Issue: React.FunctionComponent<StaticQueryProps> = ({data}) => {
   return (
-    <article>
-      <h1>{data.mdx.frontmatter.title}</h1>
-      <p>{data.mdx.frontmatter.date}</p>
-      <MDXRenderer>
-        {data.mdx.body}
-      </MDXRenderer>
-    </article>
+    <Layout>
+      <article>
+        <h1>{data.mdx.frontmatter.title}</h1>
+        <p>{data.mdx.frontmatter.date}</p>
+        <MDXRenderer>
+          {data.mdx.body}
+        </MDXRenderer>
+      </article>
+    </Layout>
   )
 }
 
@@ -26,4 +41,4 @@ export const query = graphql`
   }
 `
 
-export default BlogPost
+export default Issue
