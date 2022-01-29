@@ -16,8 +16,34 @@ module.exports = {
     "gatsby-plugin-typescript",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
-    "gatsby-plugin-mdx",
     "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "issues",
+        path: `${__dirname}/issues`,
+      }
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 720,
+            },
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1rem`,
+            },
+          },
+          `gatsby-remark-smartypants`,
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-emotion`,
       options: {
@@ -28,13 +54,6 @@ module.exports = {
         labelFormat: `[local]`,
         cssPropOptimization: true,
       },
-    },
-    {
-    resolve: "gatsby-source-filesystem",
-      options: {
-        name: "issues",
-        path: `${__dirname}/issues`,
-      }
     }
   ]
 };

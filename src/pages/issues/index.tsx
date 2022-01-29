@@ -4,7 +4,7 @@ import Layout from '../../components/Layout'
 
 interface StaticQueryProps extends PageProps {
   data: {
-    allMdx: {
+    allMarkdownRemark: {
       nodes: {
         slug: string
         frontmatter: {
@@ -18,13 +18,14 @@ interface StaticQueryProps extends PageProps {
 }
 
 const IssuePage: React.FunctionComponent<StaticQueryProps> = ({ data }) => {
+  console.log('/issues', data)
   return (
     <Layout>
       <section>
-        <h1>My issue posts:</h1>
+        {/* <h1>My issue posts:</h1>
         <div>
           {
-            data.allMdx.nodes.map(node => (
+            data.allMarkdownRemark.nodes.map(node => (
               <article key={node.frontmatter.title}>
                 <Link to={`/issues/${node.slug}`}>
                   <p>{node.frontmatter.title}</p>
@@ -34,7 +35,7 @@ const IssuePage: React.FunctionComponent<StaticQueryProps> = ({ data }) => {
               </article>
             ))
           }
-        </div>
+        </div> */}
       </section>
     </Layout>
   )
@@ -42,15 +43,17 @@ const IssuePage: React.FunctionComponent<StaticQueryProps> = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}) {
-        nodes {
+    allMarkdownRemark {
+      edges {
+        node {
           slug
           frontmatter {
-            date(formatString: "MMMM D, YYYY")
+            date
             title
             description
           }
         }
+      }
     }
   }
 `

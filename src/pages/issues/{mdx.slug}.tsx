@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../../components/Layout'
 
 interface StaticQueryProps extends PageProps {
@@ -16,27 +15,28 @@ interface StaticQueryProps extends PageProps {
 }
 
 const Issue: React.FunctionComponent<StaticQueryProps> = ({data}) => {
+  console.log('/mdx.slug', data)
   return (
     <Layout>
-      <article>
+      {/* <article>
         <h1>{data.mdx.frontmatter.title}</h1>
         <p>{data.mdx.frontmatter.date}</p>
-        <MDXRenderer>
-          {data.mdx.body}
-        </MDXRenderer>
-      </article>
+        <section />
+      </article> */}
     </Layout>
   )
 }
 
 export const query = graphql`
-  query ($id: String) {
-    mdx(id: {eq: $id}) {
+  query (
+    $id: String
+  ) {
+    markdownRemark(id: {eq: $id}) {
+      body
       frontmatter {
         title
         date(formatString: "MMMM D, YYYY")
       }
-      body
     }
   }
 `
